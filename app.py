@@ -1,19 +1,29 @@
-from flask import Flask,request,make_response,redirect,url_for,send_file,render_template
+from flask import Flask,request,make_response,redirect,url_for
+from flask import send_file,render_template,session
+from datetime import timedelta
 from file_explorer import files
 import json
 import os
 import getpass
 from valid_user import validate_user
 from logger import logger
-
+from werkzeug.utils import secure_filename
 app=Flask(__name__)
+app.config["SECRET_KEY"]=os.urandom(24)
+app.config['PERMANENT_SESSION_LIFETIME']=timedelta(days=7)
+#session.permanent=True
+app.config['upload']=os.getcwd()
 logger=logger()
-
+print(os.getcwd())
 root=r"C:\Users\%s\Desktop" % getpass.getuser()
 
 @app.route("/")
 def hello():
     logger.info("/")
+
+    session["user"]="liwe"
+
+
     files_list=files(root)
     return json.dumps(files_list)
 
@@ -26,6 +36,7 @@ def login():
     user=request.form['name']
     pwd=request.form['pwd']
     if(validate_user(user,pwd)):
+        request.coo
         return redirect(url_for("hello"))
     else:
         return render_template("login.html")
@@ -90,11 +101,30 @@ def file():
     return content
    
     
-@app.route("/upload")
+@app.route("/upload",methods=['GET','POST'])
 def upload():
-    return render_template("upload.html")
+    if(request.method=='GET'):
+        return render_template("upload.html")
+    else:
+        f=request.files['file']
+        #f.save(os.path.join(os.getcwd(),'/upload/'+secure_filename(f.filename)))
+        f.save(os.path.join(app.config['upload'],'/upload/'+secure_filename(f.filename)))
+
+@app.route("/set_cookie")
+def set_cookie():
+    res=make_response("success")
+    res.set_cookie("user","li")
+    return res
+
+@app.route("/get_cookie")
+def get_cookie():
+    return make_response(request.cookies.get("li"))
+
+@app.route("/get_session")
+def get_session():
+    return session.get("li")
 
 #app.after_request(after_requests)
 if __name__=="__main__":
     app.run(debug=True,port=5000)
-   
+    
