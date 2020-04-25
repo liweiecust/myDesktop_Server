@@ -1,6 +1,7 @@
 import os 
 
 def files(path):
+    test_path(path)
     dir=[]
     file_list=[]
     items=os.listdir(path)
@@ -15,6 +16,11 @@ def files(path):
     new_list.append(file_list)
     return new_list
 
+def test_path(path):
+    if(os.path.exists(path)):
+        pass
+    else:
+        raise IOError("path %s not found." % path)
 
 
 
