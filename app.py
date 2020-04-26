@@ -1,5 +1,5 @@
 from flask import Flask,request,make_response,redirect,url_for
-from flask import send_file,render_template,session
+from flask import send_file,render_template,session,flash
 from datetime import timedelta
 from file_explorer import files
 import json
@@ -17,15 +17,28 @@ logger=logger()
 print(os.getcwd())
 root=r"C:\Users\%s\Desktop" % getpass.getuser()
 
+def login_required(func):
+    def inner():
+        if request.cookies.get("user") not in session:
+            return redirect(url_for("login"))
+
+        func()
+    return inner
+
+
 @app.route("/")
+@login_required
 def hello():
     logger.info("/")
-
-    session["user"]="liwe"
+    
+    #session["user"]="liwe"
 
 
     files_list=files(root)
-    return json.dumps(files_list)
+    res=make_response(json.dumps(files_list))
+    #res.set_cookie("user",request.form['name'])
+    #return json.dumps(files_list)
+    return res
 
 @app.route("/login",methods=['POST','GET'])
 def login():
@@ -36,10 +49,17 @@ def login():
     user=request.form['name']
     pwd=request.form['pwd']
     if(validate_user(user,pwd)):
-        request.coo
+        msg="Success"
+        flash(msg) #消息闪现 falsh message to next request
+     
+        #res.set_cookie("username",user)
+        
         return redirect(url_for("hello"))
     else:
+        error='Invalid username or password. Please try again.'
+        flash(error,category=error)
         return render_template("login.html")
+
 
 
 # Get 请求中获取参数方法：folder=request.args.get('folder') 
@@ -107,8 +127,11 @@ def upload():
         return render_template("upload.html")
     else:
         f=request.files['file']
+        """
+        Strange thing:path os.getcwd() points to E: 
+        """
         #f.save(os.path.join(os.getcwd(),'/upload/'+secure_filename(f.filename)))
-        f.save(os.path.join(app.config['upload'],'/upload/'+secure_filename(f.filename)))
+        f.save(os.path.join("E:\\Programming",secure_filename(f.filename)))
 
 @app.route("/set_cookie")
 def set_cookie():
