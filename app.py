@@ -1,5 +1,5 @@
 from flask import Flask,request,make_response,redirect,url_for
-from flask import send_file,render_template,session,flash
+from flask import send_file,send_from_directory,render_template,session,flash
 from datetime import timedelta
 from file_explorer import files
 import json
@@ -8,7 +8,10 @@ import getpass
 from valid_user import validate_user
 from logger import logger
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
+
 app=Flask(__name__)
+CORS(app,resources={r"/*":{"origins":"*"}})
 app.config["SECRET_KEY"]=os.urandom(24)
 app.config['PERMANENT_SESSION_LIFETIME']=timedelta(days=7)
 #session.permanent=True
@@ -30,10 +33,7 @@ def login_required(func):
 @login_required
 def hello():
     logger.info("/")
-    
     #session["user"]="liwe"
-
-
     files_list=files(root)
     res=make_response(json.dumps(files_list))
     #res.set_cookie("user",request.form['name'])
@@ -68,11 +68,13 @@ def login():
 def navigate():
     logger.info("/nav")
     path=request.args.get('path')
-    
+    if(path is None):
+        path=root
     if(os.path.isfile(path)):
         return redirect(url_for('download',file=path)) # 重定向
     files_list=files(path)
     return json.dumps(files_list)
+
 """
 @app.route("/nav/<folder>") 
 def navigate2(folder):
@@ -87,7 +89,16 @@ def navigate2(folder):
 @app.route("/download")
 def download():
     logger.info("/download")
-    return send_file(request.args.get('file'))
+    fp=request.args.get('file')
+
+    directory=os.path.dirname(fp)
+    file=fp.split("/")[-1]
+    return send_from_directory(directory,file)
+
+@app.route("/view")
+def view():
+    file=request.args.get('file')
+    return send_file(file)
 """
 back to parent folder
 """
@@ -149,5 +160,6 @@ def get_session():
 
 #app.after_request(after_requests)
 if __name__=="__main__":
-    app.run(debug=True,port=5000)
+    
+    app.run(debug=False,host='0.0.0.0',port=5000)
     
