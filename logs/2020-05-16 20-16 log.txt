@@ -1,0 +1,11 @@
+2020-05-16 20:16:15,055 - _internal.py[line:113] - WARNING:  * Debugger is active!
+2020-05-16 20:16:15,079 - _internal.py[line:113] - INFO:  * Debugger PIN: 668-414-591
+2020-05-16 20:16:15,107 - _internal.py[line:113] - INFO:  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+2020-05-16 20:16:16,789 - app.py[line:74] - INFO: /download
+2020-05-16 20:16:21,114 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 20:16:21] "[36mGET /download?file=C:\users\liwe\desktop\mysql.txt HTTP/1.1[0m" 304 -
+2020-05-16 20:16:21,150 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 20:16:21] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2020-05-16 21:03:54,505 - app.py[line:28] - INFO: /
+2020-05-16 21:03:54,521 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 21:03:54] "[37mGET / HTTP/1.1[0m" 200 -
+2020-05-16 21:47:40,345 - app.py[line:28] - INFO: /
+2020-05-16 21:47:40,365 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 21:47:40] "[37mGET / HTTP/1.1[0m" 200 -
+2020-05-16 21:48:53,469 - _internal.py[line:113] - INFO:  * Detected change in 'e:\\Programming\\myDekstop_Server\\app.py', reloading

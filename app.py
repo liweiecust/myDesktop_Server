@@ -2,6 +2,7 @@ from flask import Flask,request,make_response,redirect,url_for
 from flask import send_file,send_from_directory,render_template,session,flash
 from datetime import timedelta
 from file_explorer import files
+from valid_user import validate_user
 import json
 import os
 import getpass
@@ -20,17 +21,9 @@ logger=logger()
 print(os.getcwd())
 root=r"C:\Users\%s\Desktop" % getpass.getuser()
 
-def login_required(func):
-    def inner():
-        if request.cookies.get("user") not in session:
-            return redirect(url_for("login"))
-
-        func()
-    return inner
-
 
 @app.route("/")
-@login_required
+#@login_required
 def hello():
     logger.info("/")
     #session["user"]="liwe"
@@ -40,7 +33,7 @@ def hello():
     #return json.dumps(files_list)
     return res
 
-@app.route("/login",methods=['POST','GET'])
+@app.route("/login",methods=['POST'])
 def login():
     logger.info("login")
     if(request.method=="GET"):
@@ -75,25 +68,15 @@ def navigate():
     files_list=files(path)
     return json.dumps(files_list)
 
-"""
-@app.route("/nav/<folder>") 
-def navigate2(folder):
-    path=request.args.get('folder')
-    print(path)
-    if(os.path.isfile(folder)):
-        return redirect(url_for('download')) # 重定向
-    files_list=files(folder)
-    return json.dumps(files_list)
-"""
 
 @app.route("/download")
 def download():
     logger.info("/download")
     fp=request.args.get('file')
-
     directory=os.path.dirname(fp)
-    file=fp.split("/")[-1]
-    return send_from_directory(directory,file)
+    file=str(fp).split("\\")
+    file=file[-1]
+    return send_from_directory(directory,file,as_attachment=True)
 
 @app.route("/view")
 def view():

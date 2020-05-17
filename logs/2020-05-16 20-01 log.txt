@@ -1,0 +1,47 @@
+2020-05-16 20:01:48,134 - _internal.py[line:113] - INFO:  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+2020-05-16 20:05:37,444 - app.py[line:74] - INFO: /download
+2020-05-16 20:06:09,860 - app.py[line:1891] - ERROR: Exception on /download [GET]
+Traceback (most recent call last):
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "e:\Programming\myDekstop_Server\app.py", line 79, in download
+    return send_from_directory(directory,file)
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\helpers.py", line 760, in send_from_directory
+    filename = fspath(filename)
+TypeError: expected str, bytes or os.PathLike object, not list
+2020-05-16 20:06:09,924 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 20:06:09] "[35m[1mGET /download?file=C:\users\liwe\desktop\mysql.txt HTTP/1.1[0m" 500 -
+2020-05-16 20:07:04,979 - app.py[line:74] - INFO: /download
+2020-05-16 20:07:20,902 - app.py[line:1891] - ERROR: Exception on /download [GET]
+Traceback (most recent call last):
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask_cors\extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "e:\Programming\myDekstop_Server\app.py", line 79, in download
+    return send_from_directory(directory,file)
+  File "C:\Program Files (x86)\Python\lib\site-packages\flask\helpers.py", line 760, in send_from_directory
+    filename = fspath(filename)
+TypeError: expected str, bytes or os.PathLike object, not list
+2020-05-16 20:07:20,914 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 20:07:20] "[35m[1mGET /download?file=C:\users\liwe\desktop\mysql.txt HTTP/1.1[0m" 500 -
