@@ -1,7 +1,0 @@
-2020-05-16 17:32:10,042 - _internal.py[line:113] - INFO:  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-2020-05-16 17:32:36,705 - app.py[line:74] - INFO: /download
-2020-05-16 17:33:09,839 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 17:33:09] "[33mGET /download?file=C:\\Users\\liwe\\Desktop\\myProcedure.txt HTTP/1.1[0m" 404 -
-2020-05-16 17:33:39,997 - app.py[line:74] - INFO: /download
-2020-05-16 17:35:28,228 - app.py[line:74] - INFO: /download
-2020-05-16 17:35:32,724 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 17:35:32] "[33mGET /download?file=C:\\Users\\liwe\\Desktop\\myProcedure.txt HTTP/1.1[0m" 404 -
-2020-05-16 17:35:57,875 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 17:35:57] "[33mGET /download?file=C:\\Users\\liwe\\Desktop\\myProcedure.txt HTTP/1.1[0m" 404 -

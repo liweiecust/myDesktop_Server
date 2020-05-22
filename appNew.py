@@ -28,10 +28,10 @@ def hello():
     logger.info("/")
     #session["user"]="liwe"
     files_list=files(root)
-    res=make_response(json.dumps(files_list))
+    #res=make_response(json.dumps(files_list))
     #res.set_cookie("user",request.form['name'])
     #return json.dumps(files_list)
-    return res
+    return render_template('home.html',files_list=files_list)
 
 @app.route("/login",methods=['POST'])
 def login():
@@ -142,5 +142,5 @@ def get_session():
 #app.after_request(after_requests)
 if __name__=="__main__":
     
-    app.run(debug=False,host='0.0.0.0',port=5000)
+    app.run(debug=True,host='0.0.0.0',port=5000)
     

@@ -1,9 +1,0 @@
-2020-05-16 17:17:28,491 - _internal.py[line:113] - INFO:  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-2020-05-16 17:17:45,230 - app.py[line:28] - INFO: /
-2020-05-16 17:17:45,238 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 17:17:45] "[37mGET / HTTP/1.1[0m" 200 -
-2020-05-16 17:18:11,462 - app.py[line:28] - INFO: /
-2020-05-16 17:18:11,469 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 17:18:11] "[37mGET / HTTP/1.1[0m" 200 -
-2020-05-16 17:18:29,316 - app.py[line:74] - INFO: /download
-2020-05-16 17:18:29,321 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 17:18:29] "[33mGET /download?file=C:\\Users\\liwe\\Desktop\\\u9762\u8bd5\u51c6\u5907.txt HTTP/1.1[0m" 404 -
-2020-05-16 17:21:03,279 - app.py[line:74] - INFO: /download
-2020-05-16 17:21:03,282 - _internal.py[line:113] - INFO: 127.0.0.1 - - [16/May/2020 17:21:03] "[33mGET /download?file=C:\\Users\\liwe\\Desktop\\\u9762\u8bd5\u51c6\u5907.txt HTTP/1.1[0m" 404 -
