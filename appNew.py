@@ -31,7 +31,7 @@ def hello():
     #res=make_response(json.dumps(files_list))
     #res.set_cookie("user",request.form['name'])
     #return json.dumps(files_list)
-    return render_template('home.html',files_list=files_list)
+    return render_template('home.html',path=root,files_list=files_list)
 
 @app.route("/login",methods=['POST'])
 def login():
@@ -62,9 +62,11 @@ def navigate():
     if(path is None):
         path=root
     if(os.path.isfile(path)):
-        return redirect(url_for('download',file=path)) # 重定向
+        #return redirect(url_for('download',file=path)) # 重定向
+        return redirect(url_for("view",file=path))
     files_list=files(path)
-    return json.dumps(files_list)
+    #return json.dumps(files_list)
+    return render_template("home.html",path=path,files_list=files_list)
 
 
 @app.route("/download")
@@ -79,13 +81,16 @@ def download():
 @app.route("/view")
 def view():
     file=request.args.get('file')
-    return send_file(file)
+    #return send_file(file)
+    with open(file,"r",encoding='utf-8') as fs:
+        txt=fs.read()
+        return render_template("viewcontent.html",file=file,content=txt)
 """
 back to parent folder
 """
-@app.route("/nav/back",methods=['POST'])
+@app.route("/nav/back",methods=['GET'])
 def back():
-    parent=os.path.dirname(request.form['path'])
+    parent=os.path.dirname(request.args.get('path'))
     return redirect(url_for("navigate",path=parent))
     
 
@@ -142,5 +147,5 @@ def get_session():
 #app.after_request(after_requests)
 if __name__=="__main__":
     
-    app.run(debug=True,host='0.0.0.0',port=5000)
-    
+    #app.run(debug=True,host='0.0.0.0',port=5000)
+    app.run(debug=True,host='127.0.0.1',port=5000)
